@@ -1,0 +1,20 @@
+version: "2"
+services:
+    rancher_server:
+        image: rancher/server:stable
+        restart: unless-stopped
+        volumes:
+            - /opt/rancher/mysql-var:/var/lib/mysql
+        ports:
+            - 8080:8080
+    web_server:
+        image: nginx:stable
+        restart: unless-stopped
+        links:
+            - rancher_server
+        volumes:
+            - /opt/rancher/ssl:/etc/nginx/ssl
+            - /opt/rancher/rancher.conf:/etc/nginx/conf.d/rancher.conf
+        ports:
+            - 80:80
+            - 443:443
