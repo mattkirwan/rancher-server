@@ -10,11 +10,15 @@ services:
     web_server:
         image: nginx:stable
         restart: unless-stopped
+        depends_on:
+            - rancher_server
         links:
             - rancher_server
         volumes:
-            - /opt/rancher/ssl:/etc/nginx/ssl
-            - /opt/rancher/rancher.conf:/etc/nginx/conf.d/rancher.conf
+            - /etc/letsencrypt/live/dsjh64.net/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
+            - /etc/letsencrypt/live/dsjh64.net/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
+            - /opt/rancher/nginx.conf:/etc/nginx/nginx.conf:ro
+            - /opt/rancher/rancher.conf:/etc/nginx/conf.d/rancher.conf:ro
         ports:
             - 80:80
             - 443:443
