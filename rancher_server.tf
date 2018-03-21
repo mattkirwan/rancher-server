@@ -20,8 +20,8 @@ resource "digitalocean_ssh_key" "rancher_server_ssh_key" {
 resource "digitalocean_droplet" "rancher_server_droplet" {
   image    = "ubuntu-16-04-x64"
   name     = "${var.domain}"
-  region   = "nyc1"
-  size     = "512mb"
+  region   = "ams3"
+  size     = "1gb"
   ssh_keys = ["${digitalocean_ssh_key.rancher_server_ssh_key.fingerprint}"]
 
   connection {
