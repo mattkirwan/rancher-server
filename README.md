@@ -48,9 +48,12 @@ Clone the repo and run a `terraform plan` and `apply` with the following variabl
         -var 'email=your.email.address@for.ssl.cert'
     
     terraform apply rancher_server.tfplan
-    
-    ssh -i ~/.ssh/tmp_rancher_server rancher@NEW_DROPLET_IP
 ```
+
+### Further Information
+
+You can ssh into new droplet using `ssh -i ~/.ssh/tmp_rancher_server rancher@NEW_DROPLET_IP`.
+It takes 2-3 mins for the rancher server to fully install and get up and running, you can follow it's progress by tailing the docker logs like this `docker logs -f rancher_rancher_server_1`.
 
 Should you wish to destroy your rancher server just add the `-destroy` flag to the `terraform plan` and then `apply` the updated plan.
 
