@@ -35,13 +35,13 @@ Clone the repo and run a `terraform plan` and `apply` with the following variabl
 - `cd rancher-server`
 - `terraform init`
 - `ssh-keygen -t rsa -f ~/.ssh/my_rancher_server`
-- `terraform plan -out=rancher_server.tfplan \
+- ```terraform plan -out=rancher_server.tfplan \
     -var 'do_token=YOUR_DO_TOKEN' \
     -var 'pub_key=/Users/yourhome/.ssh/my_rancher_server.pub' \
     -var 'pvt_key=/Users/yourhome/.ssh/my_rancher_server'
     -var 'passwd=YOUR_TOPSECRET_PASSWORD' \
     -var 'domain=your-rancher-server.net' \
-    -var 'email=your.email.address@for.ssl.cert'`
+    -var 'email=your.email.address@for.ssl.cert'```
 - `terraform apply rancher_server.tfplan`
 - `ssh -i ~/.ssh/tmp_rancher_server rancher@NEW_DROPLET_IP`
 
