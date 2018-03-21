@@ -12,14 +12,13 @@ The Rancher Server is powered by the stable Rancher [Docker](https://www.docker.
 
 - Terraform installed
 - Digital Ocean account
+- Domain name setup with Digital Ocean nameservers
 
 ## Usage
 
 Clone the repo and run a `terraform plan` and `apply` with the following variables.
 
 ### Terraform Variables
-
-
 
 - `do_token` - Your Digital Ocean API token ([How-to](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2#how-to-generate-a-personal-access-token)).
 - `pub_key` - The local path to an ssh public key that will be used by terraform to ssh into your new droplet.
@@ -57,6 +56,9 @@ Should you wish to destroy your rancher server just add the `-destroy` flag to t
 
 ## Todo
 
+- Auth Setup
+- MySQL Backup / Restore
+- 
 
 
 
