@@ -1,3 +1,4 @@
 *.tfplan
 *.tfstate*
 .terraform
+conf/rancher.conf
