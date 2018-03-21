@@ -31,7 +31,7 @@ Clone the repo and run a `terraform plan` and `apply` with the following variabl
 
 ### Example Usage
 
--`git clone git@github.com:mattkirwan/rancher-server.git`
+- `git clone git@github.com:mattkirwan/rancher-server.git`
 - `cd rancher-server`
 - `terraform init`
 - `ssh-keygen -t rsa -f ~/.ssh/my_rancher_server`
