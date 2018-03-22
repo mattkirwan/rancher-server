@@ -17,12 +17,20 @@ resource "digitalocean_ssh_key" "rancher_server_ssh_key" {
   public_key = "${file(var.pub_key)}"
 }
 
+resource "digitalocean_volume" "rancher_server_mysql_backup_volume" {
+  region      = "ams3"
+  name        = "rancher-mysql-backup"
+  size        = 5
+  description = "Volume for backing up the Rancher Server mysql-var directory."
+}
+
 resource "digitalocean_droplet" "rancher_server_droplet" {
-  image    = "ubuntu-16-04-x64"
-  name     = "${var.domain}"
-  region   = "ams3"
-  size     = "1gb"
-  ssh_keys = ["${digitalocean_ssh_key.rancher_server_ssh_key.fingerprint}"]
+  image      = "ubuntu-16-04-x64"
+  name       = "${var.domain}"
+  region     = "ams3"
+  size       = "1gb"
+  ssh_keys   = ["${digitalocean_ssh_key.rancher_server_ssh_key.fingerprint}"]
+  volume_ids = ["${digitalocean_volume.rancher_server_mysql_backup_volume.id}"]
 
   connection {
     user        = "root"
@@ -54,6 +62,10 @@ resource "digitalocean_droplet" "rancher_server_droplet" {
       "apt-get -y install docker-compose",
       "mkdir /opt/rancher",
       "chown rancher: /opt/rancher",
+      "mkfs.ext4 -F /dev/disk/by-id/scsi-0DO_Volume_rancher-mysql-backup",
+      "mkdir -p /mnt/rancher-mysql-backup",
+      "mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_rancher-mysql-backup /mnt/rancher-mysql-backup",
+      "echo /dev/disk/by-id/scsi-0DO_Volume_rancher-mysql-backup /mnt/rancher-mysql-backup ext4 defaults,nofail,discard 0 0 | sudo tee -a /etc/fstab",
     ]
   }
 

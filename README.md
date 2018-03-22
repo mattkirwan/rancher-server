@@ -4,7 +4,7 @@ This is my initial foray into running my own rancher server. I wanted to expose 
 
 ## What does this repo do?
 
-This repo uses [Terraform](https://www.terraform.io/) to provision a [Rancher Server](https://rancher.com/) in [Digital Ocean](https://www.digitalocean.com/) with two commands.
+This repo uses [Terraform](https://www.terraform.io/) to provision a [Rancher Server](https://rancher.com/) onto a [Digital Ocean](https://www.digitalocean.com/) droplet and mounts the internal Rancher MySQL to a Digital Ocean Volume.
 
 The Rancher Server is powered by the stable Rancher [Docker](https://www.docker.com/) image and is reverse proxied by the stable [Nginx](https://nginx.org/) docker image.
 
@@ -60,7 +60,7 @@ Should you wish to destroy your rancher server just add the `-destroy` flag to t
 ## Todo
 
 - Auth Setup
-- MySQL Backup / Restore
+- MySQL Restore
 - 
 
 
